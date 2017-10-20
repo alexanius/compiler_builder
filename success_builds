@@ -1,0 +1,49 @@
+
+native
+
+compiler           | host compiler | arch
+-----------------------------------------
+     llvm-5.0.0    | gcc-6.4.0     | x86_64
++cfe               |               |
++lld               |               |
++lldb              |               |
++polly             |               |
++compiler-rt       |               |
++libopenmp         |               |
++libunwind         |               |
+-clang-extra-tools |               |
+-libcxx            |               |
+-libcxxabi         |               |
+-----------------------------------------
+     llvm-4.0.1    | gcc-6.4.0     | x86_64
++cfe               |               |
++lld               |               |
++lldb              |               |
++polly             |               |
++compiler-rt       |               |
++libopenmp         |               |
++libunwind         |               |
+-clang-extra-tools |               |
+-libcxx            |               |
+-libcxxabi         |               |
+-----------------------------------------
+     llvm-3.9.1    | gcc-6.4.0     | x86_64
++cfe               |               |
++lld               |               |
++lldb              |               |
++polly             |               |
++compiler-rt       |               |
++libopenmp         |               |
+-libunwind         |               |
+-clang-extra-tools |               |
+-libcxx            |               |
+-libcxxabi         |               |
+-----------------------------------------
+
+"+" means additional project build successfully
+"-" means additional project build failed
+
+Known issues:
+
+* lldb needs dev-libs/libedit - BSD replacement for libreadline
+
