@@ -7,6 +7,11 @@
 source ./settings.sh
 source ./tools.sh
 
+if [ $WORK_WITH_BINUTILS = "yes" ]
+then
+    source ./binutils.sh
+fi
+
 if [ $WORK_WITH_LLVM = "yes" ]
 then
     source ./llvm.sh

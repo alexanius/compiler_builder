@@ -7,7 +7,7 @@
 
 # Here you can set all the actions you want to do
 # Possible values are "yes" and "no"
-# All the variables are derived by concreete compiler variables
+# All the variables are derived by concrete compiler variables
 # For example for LLVM there is a variable"
 # LLVM_DOWNLOAD_SOURCE="$DOWNLOAD_SOURCES"
 
@@ -15,12 +15,12 @@
 # The sources will be downloaded to the directory $GENERAL_SRC_DIR
 DOWNLOAD_SOURCES="no"
 
-# Should we unpack archieves with sources. Archieves are located
+# Should we unpack archieves with sources. Archives are located
 # in the $GENERAL_SRC_DIR
 UNPACK_SOURCES="no"
 
 # Should we build the compiler (configure && make)
-BUILD_COMPILERS="no"
+BUILD_COMPILERS="yes"
 
 # Should we install compilers (make install)
 INSTALL_COMPILERS="yes"
@@ -76,11 +76,66 @@ HOST_CPP_OPT_FLAFS="-O2"
 # Parameter for threads of parallel building
 BUILD_THREADS_NUMBER="8"
 
-# Sould we do anythong with gcc
-WORK_WITH_GCC="yes"
+# Should we do anything with binutils
+WORK_WITH_BINUTILS="yes"
 
-# Sould we do anythong with llvm
+# Should we do anything with gcc
+WORK_WITH_GCC="no"
+
+# Should we do anything with llvm
 WORK_WITH_LLVM="no"
+
+##----------------- BINUTILS special variables
+
+# BINUTILS site is here: https://www.gnu.org/software/binutils/
+
+# Version of GCC to be downloaded and installed
+BINUTILS_VERSION="2.29"
+
+# Should we download the BINUTILS sources
+BINUTILS_DOWNLOAD_SOURCES="$DOWNLOAD_SOURCES"
+
+# Should we unpack the BINUTILS sources
+BINUTILS_UNPACK_SOURCES="$UNPACK_SOURCES"
+
+# Should we build BINUTILS
+BINUTILS_BUILD_COMPILER="$BUILD_COMPILERS"
+
+# Should we install BINUTILS
+BINUTILS_INSTALL_COMPILER="$INSTALL_COMPILERS"
+
+# Name of the BINUTILS archive file
+BINUTILS_ARCHIVE_NAME="binutils-$BINUTILS_VERSION.tar.xz"
+
+# URL of server to download archives
+BINUTILS_DOWNLOAD_URL="https://ftp.gnu.org/gnu/binutils/$BINUTILS_ARCHIVE_NAME"
+
+# Directory where archives with sources lies or will be downloaded
+BINUTILS_ARCHIVE_DIR="$GENERAL_SRC_DIR"
+
+# Full path to the archive file
+BINUTILS_ARCHIVE_PATH="$BINUTILS_ARCHIVE_DIR/$BINUTILS_ARCHIVE_NAME"
+
+# Directory where we unpack BINUTILS archive
+BINUTILS_SRC_DIR="$GENERAL_SRC_DIR"
+
+# Directory where we unpack BINUTILS archive
+BINUTILS_SRC_DIR="$GENERAL_SRC_DIR"
+
+# This is root BINUTILS directory with unpacked sources
+BINUTILS_UNPACK_SRC_DIR="$BINUTILS_SRC_DIR/binutils-$BINUTILS_VERSION.src"
+
+# Here is directory for object files of BINUTILS
+BINUTILS_OBJ_DIR="$OBJ_GENERAL_DIR/binutils-$BINUTILS_VERSION"
+
+# Here is directory to install BINUTILS
+BINUTILS_INSTALL_DIR="$GENERAL_INSTALL_DIR/binutils-$BINUTILS_VERSION"
+
+# Concrete options for host C compiler to build BINUTILS
+BINUTILS_HOST_CC_OPT_FLAGS="$HOST_CC_OPT_FLAFS"
+
+# Concrete options for host C++ compiler to build BINUTILS
+BINUTILS_HOST_CPP_OPT_FLAGS="$HOST_CPP_OPT_FLAFS"
 
 
 ##----------------- GCC special variables
@@ -93,16 +148,16 @@ GCC_BUILD_CROSS="no"
 # Version of GCC to be downloaded and installed
 GCC_VERSION="7.2.0"
 
-# Should we download the LLVM sources
+# Should we download the GCC sources
 GCC_DOWNLOAD_SOURCES="$DOWNLOAD_SOURCES"
 
-# Should we unpack the LLVM sources
+# Should we unpack the GCC sources
 GCC_UNPACK_SOURCES="$UNPACK_SOURCES"
 
-# Should we build llvm
+# Should we build GCC
 GCC_BUILD_COMPILER="$BUILD_COMPILERS"
 
-# Should we install llvm
+# Should we install GCC
 GCC_INSTALL_COMPILER="$INSTALL_COMPILERS"
 
 # Name of the GCC archive file
@@ -115,9 +170,10 @@ GCC_DOWNLOAD_URL="ftp://ftp.mpi-sb.mpg.de/pub/gnu/mirror/gcc.gnu.org/pub/gcc/rel
 # Directory where archives with sources lies or will be downloaded
 GCC_ARCHIVE_DIR="$GENERAL_SRC_DIR"
 
+# Full path to the archive file
 GCC_ARCHIVE_PATH="$GCC_ARCHIVE_DIR/$GCC_ARCHIVE_NAME"
 
-# Directory where we unpack llvm archive
+# Directory where we unpack GCC archive
 GCC_SRC_DIR="$GENERAL_SRC_DIR"
 
 # This is root GCC directory with unpacked sources
@@ -132,10 +188,10 @@ GCC_INSTALL_DIR="$GENERAL_INSTALL_DIR/gcc-$GCC_VERSION"
 # List of languages to build frontend for
 GCC_LANGUAGES="c,c++,fortran"
 
-# Concreet options for host C compiler to build GCC
+# Concrete options for host C compiler to build GCC
 GCC_HOST_CC_OPT_FLAGS="$HOST_CC_OPT_FLAFS"
 
-# Concreet options for host C++ compiler to build GCC
+# Concrete options for host C++ compiler to build GCC
 GCC_HOST_CPP_OPT_FLAGS="$HOST_CPP_OPT_FLAFS"
 
 ##----------------- LLVM special variables
@@ -144,7 +200,7 @@ GCC_HOST_CPP_OPT_FLAGS="$HOST_CPP_OPT_FLAFS"
 # And some build info is here https://llvm.org/docs/GettingStarted.html
 
 # Version of LLVM to be downloaded and installed
-LLVM_VERSION="3.9.1"
+LLVM_VERSION="5.0.0"
 
 # Should we download the LLVM sources
 LLVM_DOWNLOAD_SOURCES="$DOWNLOAD_SOURCES"
@@ -183,7 +239,7 @@ LLVM_WITH_LIBOPENMP="yes"
 
 # Build LLVM with libunwind (optional)
 # Documentation: http://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/
-LLVM_WITH_LIBUNWIND="no"
+LLVM_WITH_LIBUNWIND="yes"
 
 # Build LLVM with libcxx - LLVM implemetation of standard C++ library (optional)
 # Documentation: https://libcxx.llvm.org/
