@@ -2,7 +2,7 @@
 native
 
 compiler           | host compiler | arch
------------------------------------------
+-------------------------------------------
      llvm-5.0.0    | gcc-6.4.0     | x86_64
 +cfe               |               |
 +lld               |               |
@@ -14,7 +14,7 @@ compiler           | host compiler | arch
 -clang-extra-tools |               |
 -libcxx            |               |
 -libcxxabi         |               |
------------------------------------------
+-------------------------------------------
      llvm-4.0.1    | gcc-6.4.0     | x86_64
 +cfe               |               |
 +lld               |               |
@@ -26,7 +26,7 @@ compiler           | host compiler | arch
 -clang-extra-tools |               |
 -libcxx            |               |
 -libcxxabi         |               |
------------------------------------------
+-------------------------------------------
      llvm-3.9.1    | gcc-6.4.0     | x86_64
 +cfe               |               |
 +lld               |               |
@@ -38,6 +38,8 @@ compiler           | host compiler | arch
 -clang-extra-tools |               |
 -libcxx            |               |
 -libcxxabi         |               |
+-------------------------------------------
+     gcc-7.2.0     | gcc-6.4.0     | x86_64
 -----------------------------------------
 
 "+" means additional project build successfully
