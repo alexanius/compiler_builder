@@ -67,7 +67,7 @@ fi
 
 if [ $LLVM_UNPACK_SOURCES = "yes" ]
 then
-    echo "Start unpacking llvm archives"
+    e "echo \"Start unpacking llvm archives\""
     e "mkdir -p \"$LLVM_SRC_DIR\""
     e "pushd  \"$LLVM_SRC_DIR\" > /dev/null"
 
@@ -149,12 +149,24 @@ then
     e "mkdir -p \"$LLVM_OBJ_DIR\""
     e "pushd \"$LLVM_OBJ_DIR\" > /dev/null"
 
-    echo "Start configurating compiler"
+    e "echo \"Start checking environment\""
+
+    if [ ! -f "$HOST_BINUTILS_INCLUDE/plugin-api.h" ]
+    then
+        e "echo \"Your system does not have file $HOST_BINUTILS_INCLUDE\""
+        e "echo \"You should install binutils with LTO support.\""
+        e "echo \"You can do it with this script.\""
+        exit 1
+    fi
+
+    e "echo \"Finish checking environment\""
+
+    e "echo \"Start configurating compiler\""
 
     if [ $LLVM_BUILD_CROSS = "no" ]
     then
         # Here we will configure a native compiler
-        e "cmake -G \"$LLVM_BUILD_SYSTEM\" -DCMAKE_C_COMPILER=\"$HOST_CC\" -DCMAKE_CXX_COMPILER=\"$HOST_CPP\" -DCMAKE_INSTALL_PREFIX=\"$LLVM_INSTALL_DIR\" -DCMAKE_BUILD_TYPE=$LLVM_BUILD_TYPE -DCMAKE_C_FLAGS=\"$LLVM_HOST_CC_OPT_FLAGS\" -DCMAKE_CXX_FLAGS=\"$LLVM_HOST_CPP_OPT_FLAGS\" -DLLVM_ENABLE_THREADS=$LLVM_ENABLE_THREADS -DLLVM_PARALLEL_COMPILE_JOBS=$BUILD_THREADS_NUMBER -DLLVM_PARALLEL_LINK_JOBS=$BUILD_THREADS_NUMBER \"$LLVM_UNPACK_SRC_DIR\""
+        e "cmake -G \"$LLVM_BUILD_SYSTEM\" -DCMAKE_C_COMPILER=\"$HOST_CC\" -DCMAKE_CXX_COMPILER=\"$HOST_CPP\" -DCMAKE_INSTALL_PREFIX=\"$LLVM_INSTALL_DIR\" -DLLVM_USE_LINKER=gold -DCMAKE_BUILD_TYPE=$LLVM_BUILD_TYPE -DCMAKE_C_FLAGS=\"$LLVM_HOST_CC_OPT_FLAGS\" -DCMAKE_CXX_FLAGS=\"$LLVM_HOST_CPP_OPT_FLAGS\" -DLLVM_ENABLE_THREADS=$LLVM_ENABLE_THREADS -DLLVM_PARALLEL_COMPILE_JOBS=$BUILD_THREADS_NUMBER -DLLVM_PARALLEL_LINK_JOBS=$BUILD_THREADS_NUMBER -DLLVM_BINUTILS_INCDIR=\"$HOST_BINUTILS_INCLUDE\" \"$LLVM_UNPACK_SRC_DIR\""
     else
         echo "Yet I can not build LLVM cross-compiler"
 	exit 1
@@ -162,13 +174,13 @@ then
 #e "cmake --build . --target install -- -j$MAKE_THREADS"
     fi
 
-    echo "Finish configurating compiler"
+    e "echo \"Finish configurating compiler\""
 
-    echo "Start building compiler"
+    e "echo \"Start building compiler\""
 
     e "cmake --build ."
 
-    echo "Finish building compiler"
+    e "echo \"Finish building compiler\""
 
     e "popd > /dev/null" # $LLVM_OBJ_DIR
 fi
@@ -178,11 +190,11 @@ then
     e "mkdir -p \"$LLVM_OBJ_DIR\""
     e "pushd \"$LLVM_OBJ_DIR\" > /dev/null"
 
-    echo "Start installing compiler"
+    e "echo \"Start installing compiler\""
 
     e "cmake --target install ."
 
-    echo "Finish installing compiler"
+    e "echo \"Finish installing compiler\""
 
     e "popd > /dev/null" # $LLVM_OBJ_DIR
 fi

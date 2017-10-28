@@ -17,7 +17,7 @@ DOWNLOAD_SOURCES="no"
 
 # Should we unpack archieves with sources. Archives are located
 # in the $GENERAL_SRC_DIR
-UNPACK_SOURCES="no"
+UNPACK_SOURCES="yes"
 
 # Should we build the compiler (configure && make)
 BUILD_COMPILERS="yes"
@@ -50,6 +50,10 @@ HOST_AR="$HOST_GCC_DIR/bin/ar"
 # This is host ranlib
 HOST_RANLIB="$HOST_GCC_DIR/bin/ranlib"
 
+# This is directory where plugin-api.h
+# It is needed for llvm ltoplugin
+HOST_BINUTILS_INCLUDE="$HOST_GCC_DIR/include"
+
 ##----------------- General paths
 
 # Here is root directory for all object files generated during compilation
@@ -77,13 +81,13 @@ HOST_CPP_OPT_FLAFS="-O2"
 BUILD_THREADS_NUMBER="8"
 
 # Should we do anything with binutils
-WORK_WITH_BINUTILS="yes"
+WORK_WITH_BINUTILS="no"
 
 # Should we do anything with gcc
 WORK_WITH_GCC="no"
 
 # Should we do anything with llvm
-WORK_WITH_LLVM="no"
+WORK_WITH_LLVM="yes"
 
 ##----------------- BINUTILS special variables
 
@@ -271,7 +275,7 @@ LLVM_UNPACK_SRC_DIR="$LLVM_SRC_DIR/llvm-$LLVM_VERSION.src"
 LLVM_OBJ_DIR="$OBJ_GENERAL_DIR/llvm-$LLVM_VERSION"
 
 # Here is directory to install LLVM
-LLVM_INSTALL_DIR="$GENERAL_INSTALL_DIR"
+LLVM_INSTALL_DIR="$GENERAL_INSTALL_DIR/llvm-$LLVM_VERSION"
 
 # URL of server to download archives
 LLVM_SERVER_URL="http://releases.llvm.org/$LLVM_VERSION"
