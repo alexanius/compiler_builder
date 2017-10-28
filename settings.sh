@@ -17,10 +17,10 @@ DOWNLOAD_SOURCES="no"
 
 # Should we unpack archieves with sources. Archieves are located
 # in the $GENERAL_SRC_DIR
-UNPACK_SOURCES="yes"
+UNPACK_SOURCES="no"
 
 # Should we build the compiler (configure && make)
-BUILD_COMPILERS="yes"
+BUILD_COMPILERS="no"
 
 # Should we install compilers (make install)
 INSTALL_COMPILERS="yes"
@@ -62,6 +62,7 @@ GENERAL_SRC_DIR="`getent passwd $USER | cut -d: -f6`/Downloads"
 # Here is root directory to install compilers
 GENERAL_INSTALL_DIR="/opt"
 
+# File with all executed lines output
 LOG_FILE="`pwd`/log"
 
 ##----------------- General build options
@@ -75,10 +76,19 @@ HOST_CPP_OPT_FLAFS="-O2"
 # Parameter for threads of parallel building
 BUILD_THREADS_NUMBER="8"
 
+# Sould we do anythong with gcc
+WORK_WITH_GCC="yes"
+
+# Sould we do anythong with llvm
+WORK_WITH_LLVM="no"
+
 
 ##----------------- GCC special variables
 
 # Options to build GCC can be found here: https://gcc.gnu.org/install/configure.html
+
+# Shoukd we build GCC crosscompiler
+GCC_BUILD_CROSS="no"
 
 # Version of GCC to be downloaded and installed
 GCC_VERSION="7.2.0"
@@ -95,25 +105,38 @@ GCC_BUILD_COMPILER="$BUILD_COMPILERS"
 # Should we install llvm
 GCC_INSTALL_COMPILER="$INSTALL_COMPILERS"
 
+# Name of the GCC archive file
+GCC_ARCHIVE_NAME="gcc-$GCC_VERSION.tar.xz"
+
 # URL of server to download archives
 # You can choose any other mirror here: https://gcc.gnu.org/mirrors.html
-GCC_DOWNLOAD_URL="ftp://ftp.mpi-sb.mpg.de/pub/gnu/mirror/gcc.gnu.org/pub/gcc/releases/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.xz"
+GCC_DOWNLOAD_URL="ftp://ftp.mpi-sb.mpg.de/pub/gnu/mirror/gcc.gnu.org/pub/gcc/releases/gcc-$GCC_VERSION/$GCC_ARCHIVE_NAME"
 
 # Directory where archives with sources lies or will be downloaded
 GCC_ARCHIVE_DIR="$GENERAL_SRC_DIR"
+
+GCC_ARCHIVE_PATH="$GCC_ARCHIVE_DIR/$GCC_ARCHIVE_NAME"
 
 # Directory where we unpack llvm archive
 GCC_SRC_DIR="$GENERAL_SRC_DIR"
 
 # This is root GCC directory with unpacked sources
-GCC_UNPACK_SRC_DIR="$LLVM_SRC_DIR/llvm-$LLVM_VERSION.src"
+GCC_UNPACK_SRC_DIR="$GCC_SRC_DIR/gcc-$GCC_VERSION.src"
 
 # Here is directory for object files of GCC
-GCC_OBJ_DIR="$OBJ_GENERAL_DIR/llvm-$LLVM_VERSION"
+GCC_OBJ_DIR="$OBJ_GENERAL_DIR/gcc-$GCC_VERSION"
 
 # Here is directory to install GCC
-GCC_INSTALL_DIR="$GENERAL_INSTALL_DIR"
+GCC_INSTALL_DIR="$GENERAL_INSTALL_DIR/gcc-$GCC_VERSION"
 
+# List of languages to build frontend for
+GCC_LANGUAGES="c,c++,fortran"
+
+# Concreet options for host C compiler to build GCC
+GCC_HOST_CC_OPT_FLAGS="$HOST_CC_OPT_FLAFS"
+
+# Concreet options for host C++ compiler to build GCC
+GCC_HOST_CPP_OPT_FLAGS="$HOST_CPP_OPT_FLAFS"
 
 ##----------------- LLVM special variables
 

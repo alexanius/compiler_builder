@@ -11,7 +11,7 @@ function e()
     cmd=$1
 
     echo "\$ $cmd"
-    eval $cmd 2>1 >> "$LOG_FILE"
+    { eval $cmd 2>&1; } >> "$LOG_FILE"
 
     if [ $? != 0 ] ;
     then

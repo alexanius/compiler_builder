@@ -6,5 +6,14 @@
 # Adding other script parts
 source ./settings.sh
 source ./tools.sh
-source ./llvm.sh
+
+if [ $WORK_WITH_LLVM = "yes" ]
+then
+    source ./llvm.sh
+fi
+
+if [ $WORK_WITH_GCC = "yes" ]
+then
+    source ./gcc.sh
+fi
 
