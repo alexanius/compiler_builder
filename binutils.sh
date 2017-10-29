@@ -33,18 +33,18 @@ then
     e "mkdir -p \"$BINUTILS_OBJ_DIR\""
     e "pushd \"$BINUTILS_OBJ_DIR\" > /dev/null"
 
-    echo "Start configurating compiler"
+    echo "Start configurating binutils"
 
-	e "$BINUTILS_UNPACK_SRC_DIR/configure --prefix=\"$BINUTILS_INSTALL_DIR\" --enable-gold --enable-ld --enable-lto CFLAGS=\"$BINUTILS_HOST_CC_OPT_FLAGS\" CXXFLAGS=\"$BINUTILS_HOST_CPP_OPT_FLAGS\""
+	e "$BINUTILS_UNPACK_SRC_DIR/configure --prefix=\"$BINUTILS_INSTALL_DIR\" --enable-gold --enable-ld --enable-lto CFLAGS=\"$BINUTILS_HOST_CC_OPT_FLAGS\" CXXFLAGS=\"$BINUTILS_HOST_CPP_OPT_FLAGS\" "
 
 
-    echo "Finish configurating compiler"
+    echo "Finish configurating binutils"
 
-    echo "Start building compiler"
+    echo "Start building binutils"
 
     e "make -j$BUILD_THREADS_NUMBER "
 
-    echo "Finish building compiler"
+    echo "Finish building binutils"
 
     e "popd > /dev/null" # $BINUTILS_OBJ_DIR
 fi
@@ -54,11 +54,13 @@ then
     e "mkdir -p \"$BINUTILS_OBJ_DIR\""
     e "pushd \"$BINUTILS_OBJ_DIR\" > /dev/null"
 
-    echo "Start installing compiler"
+    echo "Start installing binutils"
 
     e "make install"
 
-    echo "Finish installing compiler"
+    set_binutils "$BINUTILS_INSTALL_DIR"
+
+    echo "Finish installing binutils"
 
     e "popd > /dev/null" # $BINUTILS_OBJ_DIR
 fi

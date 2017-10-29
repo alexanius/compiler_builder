@@ -13,7 +13,7 @@
 
 # Should we download source file from the internet
 # The sources will be downloaded to the directory $GENERAL_SRC_DIR
-DOWNLOAD_SOURCES="no"
+DOWNLOAD_SOURCES="yes"
 
 # Should we unpack archieves with sources. Archives are located
 # in the $GENERAL_SRC_DIR
@@ -27,32 +27,79 @@ INSTALL_COMPILERS="yes"
 
 ##----------------- Environment variables
 
-# Util for downlading sources
+# Util for downloading sources
 WGET="wget"
 
-# Util for archieve unpacking
+# Util for archive unpacking
 TAR="tar"
 
-# This is path for host gcc compiler that will be used for building all
-# other cross-compilers. If you want just a native build this variable
-# should be set to "/usr"
-HOST_GCC_DIR="/usr"
+# Util for removing files
+RM="rm"
 
-# This is host C compiler that will build your custom compiler
-HOST_CC="$HOST_GCC_DIR/bin/gcc"
+# This function sets variables of host GCC.
+# If GCC install was caused this function will be called again with path
+# to just installed GCC
+function set_gcc()
+{
+    # This is path for host gcc compiler that will be used for building all
+    # other cross-compilers. If you want just a native build this variable
+    # should be set to "/usr"
+    HOST_GCC_DIR=$1
 
-# This is host C++ compiler that will build your custom compiler
-HOST_CPP="$HOST_GCC_DIR/bin/g++"
+    # This is host C compiler that will build your custom compiler
+    HOST_CC="$HOST_GCC_DIR/bin/gcc"
 
-# This is host archiver that will build your custom compiler
-HOST_AR="$HOST_GCC_DIR/bin/ar"
+    # This is host C++ compiler that will build your custom compiler
+    HOST_CPP="$HOST_GCC_DIR/bin/g++"
+}
 
-# This is host ranlib
-HOST_RANLIB="$HOST_GCC_DIR/bin/ranlib"
+set_gcc "/usr"
 
-# This is directory where plugin-api.h
-# It is needed for llvm ltoplugin
-HOST_BINUTILS_INCLUDE="$HOST_GCC_DIR/include"
+# This function sets variables of host BINUTILS.
+# If BINUTILS install was caused this function will be called again with path
+# to just installed BINUTILS
+function set_binutils()
+{
+    # This is path for host binutils.
+    HOST_BINUTILS_DIR=$1
+
+    # This is host archiver that will build your custom compiler
+    # It will be used for installed compiler either
+    HOST_AR="$HOST_BINUTILS_DIR/bin/ar"
+
+    # This is host assembler that will build your custom compiler
+    # It will be used for installed compiler either
+    HOST_AS="$HOST_BINUTILS_DIR/bin/as"
+
+    # This is host linker that will build your custom compiler
+    # It will be used for installed compiler either
+    HOST_LD="$HOST_BINUTILS_DIR/bin/ld"
+
+    # It will be used for installed compiler either
+    HOST_NM="$HOST_BINUTILS_DIR/bin/nm"
+
+    # It will be used for installed compiler either
+    HOST_OBJCOPY="$HOST_BINUTILS_DIR/bin/objcopy"
+
+    # It will be used for installed compiler either
+    HOST_OBJDUMP="$HOST_BINUTILS_DIR/bin/objdump"
+
+    # This is host ranlib
+    # It will be used for installed compiler either
+    HOST_RANLIB="$HOST_BINUTILS_DIR/bin/ranlib"
+
+    # It will be used for installed compiler either
+    HOST_READELF="$HOST_BINUTILS_DIR/bin/readelf"
+
+    # It will be used for installed compiler either
+    HOST_STRIP="$HOST_BINUTILS_DIR/bin/strip"
+
+    # This is directory where plugin-api.h
+    # It is needed for llvm ltoplugin
+    HOST_BINUTILS_INCLUDE="$HOST_BINUTILS_DIR/include"
+}
+
+set_binutils "/usr"
 
 ##----------------- General paths
 
@@ -81,13 +128,31 @@ HOST_CPP_OPT_FLAFS="-O2"
 BUILD_THREADS_NUMBER="8"
 
 # Should we do anything with binutils
-WORK_WITH_BINUTILS="no"
+WORK_WITH_BINUTILS="yes"
 
 # Should we do anything with gcc
-WORK_WITH_GCC="no"
+WORK_WITH_GCC="yes"
 
 # Should we do anything with llvm
 WORK_WITH_LLVM="yes"
+
+# This is internal variable that sets all the other target variables as they are
+# different for gcc, linux and llvm
+BUILD_TARGET="x86-64"
+
+if [ $BUILD_TARGET = "x86-64" ]
+then
+    LLVM_TARGET="X86"
+elif [ $BUILD_TARGET = "x86" ]
+then
+    LLVM_TARGET="X86"
+elif [ $BUILD_TARGET = "sparc64" ]
+then
+    LLVM_TARGET="sparcv9"
+elif [ $BUILD_TARGET = "sparc" ]
+then
+    LLVM_TARGET="sparc"
+fi
 
 ##----------------- BINUTILS special variables
 
