@@ -192,6 +192,14 @@ then
 
     e "echo \"Start installing compiler\""
 
+    if [ $LLVM_VERSION == "6.0.0" ]
+    then
+        # This line will fix install error on my build server:
+        # CMake Error at tools/lldb/scripts/cmake_install.cmake:41 (file):
+        # file INSTALL cannot find "/tmp/llvm-6.0.0/lib/python2.7".
+        e "$LN -s $LLVM_OBJ_DIR/lib64/python2.7 $LLVM_OBJ_DIR/lib/python2.7"
+    fi
+
     e "cmake -DCMAKE_INSTALL_PREFIX=\"$LLVM_INSTALL_DIR\" -P \"$LLVM_OBJ_DIR\"/cmake_install.cmake"
 
     e "echo \"Finish installing compiler\""

@@ -36,6 +36,9 @@ TAR="tar"
 # Util for removing files
 RM="rm"
 
+# Util for removing files
+LN="ln"
+
 # This function sets variables of host GCC.
 # If GCC install was caused this function will be called again with path
 # to just installed GCC
@@ -95,7 +98,7 @@ function set_binutils()
     HOST_STRIP="$HOST_BINUTILS_DIR/bin/strip"
 
     # This is directory where plugin-api.h
-    # It is needed for llvm ltoplugin
+    # It is needed for llvm lto plugin
     HOST_BINUTILS_INCLUDE="$HOST_BINUTILS_DIR/include"
 }
 
@@ -111,6 +114,7 @@ OBJ_GENERAL_DIR="/tmp"
 GENERAL_SRC_DIR="`getent passwd $USER | cut -d: -f6`/Downloads"
 
 # Here is root directory to install compilers
+#GENERAL_INSTALL_DIR="/opt"
 GENERAL_INSTALL_DIR="/opt"
 
 # File with all executed lines output
@@ -125,16 +129,16 @@ HOST_CC_OPT_FLAFS="-O2"
 HOST_CPP_OPT_FLAFS="-O2"
 
 # Parameter for threads of parallel building
-BUILD_THREADS_NUMBER="8"
+BUILD_THREADS_NUMBER="4"
 
 # Should we do anything with binutils
-WORK_WITH_BINUTILS="yes"
+WORK_WITH_BINUTILS="no"
 
 # Should we do anything with gcc
 WORK_WITH_GCC="yes"
 
 # Should we do anything with llvm
-WORK_WITH_LLVM="yes"
+WORK_WITH_LLVM="no"
 
 # This is internal variable that sets all the other target variables as they are
 # different for gcc, linux and llvm
@@ -159,7 +163,7 @@ fi
 # BINUTILS site is here: https://www.gnu.org/software/binutils/
 
 # Version of GCC to be downloaded and installed
-BINUTILS_VERSION="2.29"
+BINUTILS_VERSION="2.30"
 
 # Should we download the BINUTILS sources
 BINUTILS_DOWNLOAD_SOURCES="$DOWNLOAD_SOURCES"
@@ -215,7 +219,7 @@ BINUTILS_HOST_CPP_OPT_FLAGS="$HOST_CPP_OPT_FLAFS"
 GCC_BUILD_CROSS="no"
 
 # Version of GCC to be downloaded and installed
-GCC_VERSION="7.2.0"
+GCC_VERSION="8.1.0"
 
 # Should we download the GCC sources
 GCC_DOWNLOAD_SOURCES="$DOWNLOAD_SOURCES"
@@ -231,6 +235,7 @@ GCC_INSTALL_COMPILER="$INSTALL_COMPILERS"
 
 # Name of the GCC archive file
 GCC_ARCHIVE_NAME="gcc-$GCC_VERSION.tar.xz"
+#GCC_ARCHIVE_NAME="gcc-$GCC_VERSION.tar.bz2"
 
 # URL of server to download archives
 # You can choose any other mirror here: https://gcc.gnu.org/mirrors.html
@@ -269,7 +274,7 @@ GCC_HOST_CPP_OPT_FLAGS="$HOST_CPP_OPT_FLAFS"
 # And some build info is here https://llvm.org/docs/GettingStarted.html
 
 # Version of LLVM to be downloaded and installed
-LLVM_VERSION="5.0.0"
+LLVM_VERSION="6.0.0"
 
 # Should we download the LLVM sources
 LLVM_DOWNLOAD_SOURCES="$DOWNLOAD_SOURCES"
