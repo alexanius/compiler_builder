@@ -325,7 +325,7 @@ LLVM_WITH_LIBCXXABI="no"
 
 # Build LLVM with clang-tools-extra - some tools including clang-analyzer (optional)
 # Documentation: https://clang.llvm.org/extra/ReleaseNotes.html
-LLVM_WITH_CLANG_TOOLS_EXTRA="no"
+LLVM_WITH_CLANG_TOOLS_EXTRA="yes"
 
 # Sould we build a cross-compiler. If "no" is set LLVM will be build in natine mode
 LLVM_BUILD_CROSS="no"

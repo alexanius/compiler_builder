@@ -3,61 +3,61 @@ native
 
 compiler           | host compiler | host arch | target arch
 --------------------------------------------------------------
-     llvm-6.0.0    | gcc-7.3.0     | x86_64
-+cfe               |               |
-+lld               |               |
-+lldb              |               |
-+polly             |               |
-+compiler-rt       |               |
-+libopenmp         |               |
-+libunwind         |               |
--clang-extra-tools |               |
--libcxx            |               |
--libcxxabi         |               |
+     llvm-6.0.0    | gcc-8.1.0     | x86_64    | x86_64
++cfe               | gcc-7.3.0     |           |
++lld               |               |           |
++lldb              |               |           |
++polly             |               |           |
++compiler-rt       |               |           |
++libopenmp         |               |           |
++libunwind         |               |           |
++clang-extra-tools |               |           |
+-libcxx            |               |           |
+-libcxxabi         |               |           |
 --------------------------------------------------------------
-     llvm-5.0.0    | gcc-6.4.0     | x86_64
-+cfe               |               |
-+lld               |               |
-+lldb              |               |
-+polly             |               |
-+compiler-rt       |               |
-+libopenmp         |               |
-+libunwind         |               |
--clang-extra-tools |               |
--libcxx            |               |
--libcxxabi         |               |
+     llvm-5.0.0    | gcc-6.4.0     | x86_64    | x86_64
++cfe               |               |           |
++lld               |               |           |
++lldb              |               |           |
++polly             |               |           |
++compiler-rt       |               |           |
++libopenmp         |               |           |
++libunwind         |               |           |
+-clang-extra-tools |               |           |
+-libcxx            |               |           |
+-libcxxabi         |               |           |
 --------------------------------------------------------------
-     llvm-4.0.1    | gcc-6.4.0     | x86_64
-+cfe               |               |
-+lld               |               |
-+lldb              |               |
-+polly             |               |
-+compiler-rt       |               |
-+libopenmp         |               |
-+libunwind         |               |
--clang-extra-tools |               |
--libcxx            |               |
--libcxxabi         |               |
+     llvm-4.0.1    | gcc-6.4.0     | x86_64    | x86_64
++cfe               |               |           |
++lld               |               |           |
++lldb              |               |           |
++polly             |               |           |
++compiler-rt       |               |           |
++libopenmp         |               |           |
++libunwind         |               |           |
+-clang-extra-tools |               |           |
+-libcxx            |               |           |
+-libcxxabi         |               |           |
 --------------------------------------------------------------
-     llvm-3.9.1    | gcc-6.4.0     | x86_64
-+cfe               |               |
-+lld               |               |
-+lldb              |               |
-+polly             |               |
-+compiler-rt       |               |
-+libopenmp         |               |
--libunwind         |               |
--clang-extra-tools |               |
--libcxx            |               |
--libcxxabi         |               |
+     llvm-3.9.1    | gcc-6.4.0     | x86_64    | x86_64
++cfe               |               |           |
++lld               |               |           |
++lldb              |               |           |
++polly             |               |           |
++compiler-rt       |               |           |
++libopenmp         |               |           |
+-libunwind         |               |           |
+-clang-extra-tools |               |           |
+-libcxx            |               |           |
+-libcxxabi         |               |           |
 --------------------------------------------------------------
-     gcc-8.1.0     | gcc-7.3.0     | x86_64
+     gcc-8.1.0     | gcc-7.3.0     | x86_64    | x86_64
 --------------------------------------------------------------
-     gcc-7.2.0     | gcc-6.4.0     | x86_64
+     gcc-7.2.0     | gcc-6.4.0     | x86_64    | x86_64
 --------------------------------------------------------------
-     gcc-6.4.0     | gcc-6.4.0     | x86_64
+     gcc-6.4.0     | gcc-6.4.0     | x86_64    | x86_64
 --------------------------------------------------------------
-     binutils-2.29 | gcc-6.4.0     | x86_64
+     binutils-2.29 | gcc-6.4.0     | x86_64    | x86_64
 --------------------------------------------------------------
 
 "+" means additional project build successfully
